@@ -212,9 +212,7 @@
       flex-direction: column;
     }
 
-    .viewer.open {
-      display: flex;
-    }
+    .viewer.open { display: flex; }
 
     .viewer-bar {
       flex: 0 0 auto;
@@ -260,18 +258,6 @@
       background: #071321;
     }
 
-    .fallback {
-      display: none;
-      padding: 20px;
-      color: white;
-      line-height: 1.45;
-    }
-
-    .fallback a {
-      color: #8fd36b;
-      font-weight: 800;
-    }
-
     svg { display: block; }
 
     @media (max-width: 420px) {
@@ -305,7 +291,7 @@
       </header>
 
       <div class="module-grid">
-        <button class="module-card" type="button" data-title="AveliCoach" data-url="https://avelitrix.github.io/Coach/">
+        <button class="module-card" type="button" data-title="AveliCoach" data-url="https://avelitrix.github.io/Coach/" data-open="frame">
           <span class="icon-wrap" aria-hidden="true">
             <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="32" cy="32" r="20" fill="#D9F4C8" stroke="#67B63E" stroke-width="4"/>
@@ -319,7 +305,7 @@
           <small>Treinador e análise</small>
         </button>
 
-        <button class="module-card" type="button" data-title="Breathlitrix" data-url="https://avelitrix.github.io/breathlitrix/">
+        <button class="module-card" type="button" data-title="Breathlitrix" data-url="https://avelitrix.github.io/breathlitrix/" data-open="frame">
           <span class="icon-wrap" aria-hidden="true">
             <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M32 12C37 18 43 23 43 33C43 42 38 49 32 49C26 49 21 42 21 33C21 23 27 18 32 12Z" fill="#FFD86B" stroke="#67B63E" stroke-width="4"/>
@@ -331,7 +317,7 @@
           <small>Respiração guiada</small>
         </button>
 
-        <button class="module-card" type="button" data-title="Diário" data-url="https://avelitrix.github.io/Diario/">
+        <button class="module-card" type="button" data-title="Diário" data-url="https://avelitrix.github.io/Diario/" data-open="direct">
           <span class="icon-wrap" aria-hidden="true">
             <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="16" y="12" width="32" height="40" rx="5" fill="#F4FAEF" stroke="#67B63E" stroke-width="4"/>
@@ -342,7 +328,7 @@
           <small>Registro do dia</small>
         </button>
 
-        <button class="module-card" type="button" data-title="Estiling" data-url="https://avelitrix.github.io/Estiling/">
+        <button class="module-card" type="button" data-title="Estiling" data-url="https://avelitrix.github.io/Estiling/" data-open="frame">
           <span class="icon-wrap" aria-hidden="true">
             <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="49" cy="15" r="8" stroke="#67B63E" stroke-width="4"/>
@@ -356,7 +342,7 @@
           <small>Controle emocional</small>
         </button>
 
-        <button class="module-card" type="button" data-title="Estrategista" data-url="https://avelitrix.github.io/Estrategista/">
+        <button class="module-card" type="button" data-title="Estrategista" data-url="https://avelitrix.github.io/Estrategista/" data-open="frame">
           <span class="icon-wrap" aria-hidden="true">
             <svg width="40" height="40" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="13" y="13" width="38" height="38" rx="7" fill="#F4FAEF" stroke="#67B63E" stroke-width="4"/>
@@ -376,7 +362,7 @@
           <span aria-hidden="true">⬇️</span>
           <span>Instalar Avelitrix</span>
         </button>
-        <p class="tip">Se o botão não aparecer, use o menu do Chrome para instalar ou criar o atalho.</p>
+        <p class="tip">Diário abre direto para evitar travamento no Android.</p>
       </div>
     </section>
   </main>
@@ -388,11 +374,6 @@
       <button class="viewer-btn" type="button" id="reloadBtnAvelitrix">Recarregar</button>
     </div>
     <iframe class="module-frame" id="moduleFrameAvelitrix" title="Módulo Avelitrix" allow="fullscreen"></iframe>
-    <div class="fallback" id="fallbackAvelitrix">
-      Não foi possível carregar o módulo dentro do Avelitrix.
-      <br><br>
-      <a href="#" id="fallbackLinkAvelitrix">Abrir módulo</a>
-    </div>
   </section>
 
   <script>
@@ -405,20 +386,13 @@
       const viewerTitle = document.getElementById('viewerTitleAvelitrix');
       const backBtn = document.getElementById('backBtnAvelitrix');
       const reloadBtn = document.getElementById('reloadBtnAvelitrix');
-      const fallback = document.getElementById('fallbackAvelitrix');
-      const fallbackLink = document.getElementById('fallbackLinkAvelitrix');
       let deferredPrompt = null;
       let currentUrl = '';
-      let currentTitle = '';
 
       function openModule(title, url, pushState = true) {
-        currentTitle = title;
         currentUrl = url;
         viewerTitle.textContent = title;
-        fallback.style.display = 'none';
-        frame.style.display = 'block';
         frame.src = url;
-        fallbackLink.href = url;
         home.style.display = 'none';
         viewer.classList.add('open');
         document.body.classList.remove('home-mode');
@@ -432,7 +406,6 @@
       function closeModule(pushState = true) {
         frame.src = 'about:blank';
         currentUrl = '';
-        currentTitle = '';
         viewer.classList.remove('open');
         home.style.display = 'flex';
         document.body.classList.remove('viewer-mode');
@@ -450,7 +423,16 @@
         card.addEventListener('blur', () => card.classList.remove('is-active'));
 
         card.addEventListener('click', () => {
-          openModule(card.dataset.title, card.dataset.url);
+          const title = card.dataset.title;
+          const url = card.dataset.url;
+          const openMode = card.dataset.open;
+
+          if (openMode === 'direct') {
+            window.location.href = url;
+            return;
+          }
+
+          openModule(title, url);
         });
       });
 
@@ -465,11 +447,6 @@
         } else {
           closeModule(false);
         }
-      });
-
-      frame.addEventListener('error', () => {
-        frame.style.display = 'none';
-        fallback.style.display = 'block';
       });
 
       window.addEventListener('beforeinstallprompt', (event) => {
