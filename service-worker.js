@@ -1,4 +1,4 @@
-const CACHE_NAME = 'avelitrix-shell-v2-hibrido';
+const CACHE_NAME = 'avelitrix-shell-v4-boletim-io';
 const APP_ASSETS = [
   './',
   './index.html',

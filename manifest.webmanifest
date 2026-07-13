@@ -1,7 +1,7 @@
 {
   "name": "Avelitrix",
   "short_name": "Avelitrix",
-  "description": "Central simples para abrir os módulos AveliCoach, Breathlitrix, Diário, Estiling e Estrategista.",
+  "description": "Central simples para abrir os módulos AveliCoach, Boletim, Breathlitrix, Diário, Estiling e Estrategista.",
   "lang": "pt-BR",
   "start_url": "/Avelitrix/",
   "scope": "/",
